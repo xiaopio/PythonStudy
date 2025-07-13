@@ -31,3 +31,5 @@ for i in range(1, num + 1):
         count2 += 1
 print(f"1到{num}之间一共有{count2}个偶数")
 print(i)
+
+
