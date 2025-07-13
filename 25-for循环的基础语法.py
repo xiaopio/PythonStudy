@@ -16,10 +16,18 @@ for i in range(10):
     print(f"{i}\t", end='')
 print()
 
-for j in range(5, 10):
-    print(f"{j}\t", end='')
+for i in range(5, 10):
+    print(f"{i}\t", end='')
 print()
 
-for k in range(5, 10, 2):
-    print(f"{k}\t", end='')
+for i in range(5, 10, 2):
+    print(f"{i}\t", end='')
+print()
 
+num = 100
+count2 = 0
+for i in range(1, num + 1):
+    if i % 2 == 0:
+        count2 += 1
+print(f"1到{num}之间一共有{count2}个偶数")
+print(i)
