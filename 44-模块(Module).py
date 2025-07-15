@@ -31,6 +31,13 @@ by LiXiaoYang
 
 # 导入自定义模块
 # import my_module1
-from my_module1 import test
+# from my_module1 import test
 # my_module1.test(1, 2)
+# test(1, 2)
+
+
+from my_module1 import *
 test(1, 2)
+test2()
+# NameError: name 'test3' is not defined. Did you mean: 'test'?
+# test3()
