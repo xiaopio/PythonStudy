@@ -96,6 +96,48 @@ def get_provinces_diagnosed_data(file_name: str, ):
         if _fr:
             _fr.close()
 
+
+def get_provincial_confirmed_data(file_name: str, city_num: int):
+    """
+    获取各省份确诊数据
+    :param file_name: 文件路径
+    :param city_num: 城市编号
+    :return: province_name 省份名, data 城市确诊数据
+    """
+    _fr = None
+    try:
+        _fr = open(file_name, "r", encoding="utf-8")
+    except Exception as e:
+        print(f"错误提示:{e}")
+    else:
+        _data = _fr.read()
+        _data = json.loads(_data)
+        areas = _data["areaTree"][0]["children"][city_num]
+        province_name = areas["name"]
+        # province_name = add_suffix_to_the_province_name({areas["name"]})[0]
+        data = []
+        for city in areas["children"]:
+            city_name = city["name"]
+            # TODO 这里只对河南省名称不规范的地市进行了修改，其他省份，直辖市、自治州什么的没做优化
+            if city_name == "济源示范区":
+                city_name = city["name"][:-3] + "市"
+            elif city_name == "地区待确认":
+                city_name = city["name"]
+            else:
+                city_name = city["name"] + "市"
+            confirmed_num = city["total"]["confirm"]
+            data.append((city_name, confirmed_num))
+        # print(data)
+        return province_name, data
+    finally:
+        if _fr:
+            _fr.close()
+
+# get_provincial_confirmed_data
+
 # if __name__ == '__main__':
+
 #     country_name, update_date, diagnosed_data = get_diagnosed_data('美国.txt', 'jsonp_1629344292311_69436(', 2)
 #     print(country_name, update_date, diagnosed_data)
+#     data = get_provincial_confirmed_data()
+#     print(data)
